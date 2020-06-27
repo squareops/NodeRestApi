@@ -13,12 +13,14 @@ var index = require('./routes/index');
 var users = require('./routes/users');
 var products = require('./routes/products');
 var app = express();
+require('dotenv').config();
 
 mongoose.Promise = global.Promise;
 
-mongoose.connect('mongodb://localhost/product', {useNewUrlParser: true, useFindAndModify: false })
+mongoose.connect(process.env.MONGODB_URI, {useNewUrlParser: true, useFindAndModify: false })
   .then(() =>  console.log('connection successful'))
   .catch((err) => console.error(err));
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
